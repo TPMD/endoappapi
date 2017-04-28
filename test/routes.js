@@ -3,7 +3,9 @@ import server from '../server'
 import request from 'supertest'
 import mongoose from 'mongoose'
 import agent from 'superagent-bluebird-promise'
+import fs from 'fs'
 
+let token
 describe('routes', () => {
   before(done => {
     mongoose
@@ -32,7 +34,7 @@ describe('routes', () => {
   })
   it('should login a user', done => {
     let user = {
-      email: 'jack@gmail.com',
+      email: 'testing@gmail.com',
       password: 'testing123'
     }
     agent
@@ -41,7 +43,20 @@ describe('routes', () => {
     .then(res => {
       expect(res).to.be.ok
       expect(res.body).to.be.an('object')
-      expect(res.body.token).to.not.be.undefined
+      console.log('yooo', res.body)
+      token = res.body.token
+      done()
+    })
+    .catch(done)
+  })
+  it('should fetch user by token', done => {
+    agent
+    .get(process.env.API_URL+`/user`)
+    .query({token})
+    .then(res => {
+      expect(res).to.be.ok
+      expect(res.body).to.be.an('object')
+      console.log(res.body)
       done()
     })
     .catch(done)
@@ -63,4 +78,5 @@ describe('routes', () => {
       done()
     })
   })
+  
 })

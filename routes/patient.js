@@ -12,11 +12,13 @@ router.route('/')
     .catch(err => res.send(err))
   })
   .post((req, res) => {
+    console.log('creating', req.body)
     mongoose
     .model('patient')
     .create(req.body)
     .then(patient => res.json(patient))
   })
+
 
 
 export default router

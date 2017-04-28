@@ -5,9 +5,11 @@ const patientSchema = mongoose.Schema({
   doctor: String,
   createdAt: Date,
   modified: Date,
-  insurance: String
+  insurance: String,
+  userId: String
 }, {strict:false})
 
+patientSchema.set('toObject', {getters:true})
 
 patientSchema.pre('save', function(next) {
   this.modified = Date.now()

@@ -8,11 +8,24 @@ const router = Router()
 
 router.route('/')
   .get((req, res) => {
-    mongoose
-    .model('user')
-    .find({})
-    .then(users => res.json(users))
-    .catch(err => res.send(err))
+    let token = req.query.token
+    if(token) {
+      mongoose
+      .model('user')
+      .findOne({token})
+      .then(user => {
+        if(!user) {
+          return res.status(404).send({
+            message: 'Token Expired. Login again.'
+          })
+        }
+        return res.status(200).json(user)
+      })
+      .catch(err => res.send(err))
+    }
+    else {
+      res.send({code:500})
+    }
   })
   .post((req, res) => {
     mongoose
@@ -37,7 +50,15 @@ router.route('/login')
           if(!!err) {
             return res.status(err.status_code).send(err.message)
           }
-          return res.status(200).json({token, user})
+          else {
+            user.token = token
+            user.save((err, updatedUser) => {
+              if(!!err) {
+                return res.status(err).send("could not update users token")
+              }
+              return res.status(200).send(updatedUser)
+            })
+          }
         }))
       }
       else {

@@ -7,9 +7,7 @@ const doctorSchema = mongoose.Schema({
   createdAt: Date
 })
 
-
-
-
+doctorSchema.set('toObject', {getters:true})
 
 
 export default mongoose.model('doctor', doctorSchema)
