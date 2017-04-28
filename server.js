@@ -2,7 +2,6 @@ import './config'
 import express from 'express'
 import bodyParser from 'body-parser'
 import router from './routes'
-import expressSession from 'express-session'
 import cors from 'cors'
 
 let app = express()
