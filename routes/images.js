@@ -9,7 +9,7 @@ router.route('/upload')
   .post((req, res) => {
     let buf = new Buffer(req.body.url.replace(/^data:image\/\w+;base64,/, ""),'base64')
     let data = {
-      Key: 'testing',
+      Key: `image-${Math.random()}`,
       Body: buf,
       ContentEncoding: 'base64',
       ContentType: 'image/png'
