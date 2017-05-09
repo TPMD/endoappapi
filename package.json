@@ -34,7 +34,8 @@
     "momentjs": "^1.1.17",
     "mongoose": "^4.4.11",
     "superagent": "^1.8.3",
-    "superagent-bluebird-promise": "^4.2.0"
+    "superagent-bluebird-promise": "^4.2.0",
+    "dotenv": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

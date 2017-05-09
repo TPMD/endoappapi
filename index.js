@@ -1,3 +1,3 @@
 require('babel-register')
 require('./config')
-require('./app.js')
+require('./main.js')
