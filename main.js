@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 initializeDatabase()
   .then(() => {
-    server.listen(5000, () => console.log('Listening on 5000'))
+    server.listen(process.env.PORT || 3000)
   })
 
 
