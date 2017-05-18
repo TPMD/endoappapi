@@ -65,6 +65,7 @@ router.route('/login')
         return res.status(403).send('Incorrect password')
       }
     })
+    .catch(err => res.status(500).send('something went wrong'))
   })
 router.route('/signup')
   .post((req, res) => {
